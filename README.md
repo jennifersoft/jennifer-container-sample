@@ -1,9 +1,8 @@
 # Jennifer container 샘플 프로젝트
-- - -
 
 Jennifer Server 와 Agent 를 컨테이너 환경에서 띄울 경우에 대한 샘플 프로젝트
 
-# Prerequirement
+# 사전 준비사항
 
 > Jennifer Server 파일의 크기가 커서 github 에 올리지 않고 링크로 대체함
 
@@ -16,7 +15,6 @@ $ mv ./jennifer-server-5.6.1.8.zip ./server/jennifer-server-5.6.1.8.zip
 
 
 # 설명
-- - -
 Aagent 는 두 서버에서 Agent 파일을 다운받는 Cloud 배포 방식과 이미지 내에 삽입하는 Embedded 방식을 제공한다
 
 ## 실행
