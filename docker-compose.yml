@@ -1,0 +1,43 @@
+version: "2"
+
+services:
+    jennifer_java_server:
+        build:
+            context: ./server
+        container_name: jennifer_java_server
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        ports:
+            - 7900:7900
+            - 5000:5000
+        volumes:
+            - ./server/license:/opt/server.data/conf/license
+            - ./server/db_data:/opt/server.data/db_data
+
+    jennifer_java_agent1:
+        build:
+            context: ./agent/download
+        container_name: jennifer_java_agent1
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        environment:
+            JENNIFER_DOWNLOAD_SERVER: http://jennifer_java_server:7900
+        ports:
+            - 18080:8080
+        volumes:
+            - ./agent/download/jennifer.conf:/opt/agent.java/conf/jennifer.conf
+        depends_on:
+            - jennifer_java_server
+
+    jennifer_java_agent2:
+        build:
+            context: ./agent/embedded
+        container_name: jennifer_java_agent2
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        ports:
+            - 28080:8080
+        volumes:
+            - ./agent/embedded/jennifer.conf:/opt/agent.java/conf/jennifer.conf
+        depends_on:
+            - jennifer_java_server
